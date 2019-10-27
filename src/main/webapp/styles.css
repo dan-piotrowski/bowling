@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+table{
+	table-layout: fixed;
+	width: 40%;
+	text-align: center;
+	border: 2px solid black; 
+	border-collapse: collapse;
+}
+
+td{
+	border: 2px solid black;
+	height: 20px;
+}

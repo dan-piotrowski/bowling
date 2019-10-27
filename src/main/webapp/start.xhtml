@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:head>
+        <title>Bowling</title>
+        <link rel="stylesheet" href="styles.css"></link>
+    </h:head>
+    <h:body>
+    	<h2>Bowling Score Board:</h2>
+    	
+    	<table>
+    		<tr>
+    			<c:forEach var="i" begin="1" end="9">
+    				<td colspan="2">${i}</td>
+				</c:forEach>
+    			<td colspan="3">10</td>
+    		</tr>
+    		
+    		<tr>
+    			<c:forEach var="i" begin="0" end="9">
+    				<td><h:outputText value="#{gameManager.game.frames[i].firstScoreDisplay}" /></td>
+    				<td><h:outputText value="#{gameManager.game.frames[i].secondScoreDisplay}" /></td>
+				</c:forEach>
+    			<td><h:outputText value="#{gameManager.game.frames[9].thirdScoreDisplay}" /></td>
+    		</tr>
+    		
+    		<tr>
+    			<c:forEach var="i" begin="0" end="8">
+    				<td colspan="2"><h:outputText value="#{gameManager.game.frames[i].frameScoreFinished ? gameManager.game.getScore(i) : ''}"/></td>
+				</c:forEach>
+    			<td colspan="3"><h:outputText value="#{gameManager.game.frames[9].frameScoreFinished ? gameManager.game.getScore(9) : ''}"/></td>
+    		</tr>
+    	</table>
+    	
+    	<h:form>
+    	   Pins hit: <h:inputText value="#{gameManager.pinsHit}" disabled="#{gameManager.game.gameFinished}"></h:inputText>
+    	   <h:commandButton value="Submit" action="#{gameManager.submit}" disabled="#{gameManager.game.gameFinished}"></h:commandButton>
+    	   <h:commandButton value="New Game" action="#{gameManager.newGame}"></h:commandButton> <br />
+    	   <h:outputText value="${gameManager.message}"></h:outputText>
+    	</h:form>
+    	
+    </h:body>
+</html>
